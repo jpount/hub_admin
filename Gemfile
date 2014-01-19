@@ -39,6 +39,7 @@ gem "thrift"
 gem 'gotime-cassandra_object'
 
 gem "puma"
+gem "unicorn"
 
 group :test, :development do
   gem "rspec-rails"
