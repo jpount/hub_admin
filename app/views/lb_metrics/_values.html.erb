@@ -1,0 +1,29 @@
+    <h5>LB Totals</h5>
+    <div class="row-fluid">
+      <div class="span12">
+        <table class="table table-condensed table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>TPS last sec</th>
+            <th>TPS high mark</th>
+            <th>Total Requests</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @haproxy_stats.each do |stat| %>
+          <tr>
+            <td><%= stat.lb_name %></td>
+            <td><%= stat.proxy_name %>/<%= stat.proxy_type %></td>
+            <td><%= stat.status %></td>
+            <td><%= stat.last_sec_reqs %></td>
+            <td><%= stat.high_reqs %></td>
+            <td><%= stat.tot_reqs %></td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>

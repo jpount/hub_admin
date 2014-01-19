@@ -1,0 +1,55 @@
+<%= form_for(@api, html: { class: "form-horizontal" }) do |f| %>
+  <% if @api.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@api.errors.count, "error") %> prohibited this api from being saved:</h2>
+      <ul>
+      <% @api.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">URL</label>
+      <div class="controls">
+        <%= f.text_field :url, :value => @api.url %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">ALT URL</label>
+      <div class="controls">
+        <%= f.text_field :alt_url, :value => @api.alt_url %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">Display Name</label>
+      <div class="controls">
+        <%= f.text_field :display_name, :value => @api.display_name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">Type</label>
+      <div class="controls">
+        <%= f.select :api_type, ['IN', 'OUT'], :include_blank => true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputLastPing">Last Ping</label>
+      <div class="controls">
+        <%= f.text_field :last_ping, :value => @api.last_ping %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">Ignore?</label>
+      <div class="controls">
+        <%= f.check_box :ignore, :value => @api.ignore %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit :class => "btn btn-primary" %>
+      </div>
+    </div>
+
+<% end %>

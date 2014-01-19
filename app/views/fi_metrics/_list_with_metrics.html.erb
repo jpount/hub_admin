@@ -1,0 +1,37 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Total</th>
+    <th>Success</th>
+    <th>Errors</th>
+    <th>IP</th>
+    <th>TPS last Entry</th>
+    <th>TPS last Exit</th>
+    <th>TPS Max Entry</th>
+    <th>TPS Max Exit</th>
+    <th>Updated</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% fis.each do |fi| %>
+      <tr>
+        <td><%= fi.msg_name %></td>
+        <td><%= fi.total_count %></td>
+        <td style="color:green"><%= fi.success_count %></td>
+        <td style="color:red"><%= fi.error_count %></td>
+        <%  if fi.fi.nil? %>
+            <td><%= fi.ip %></td>
+        <% else %>
+            <td><%= fi.fi.display_name %> (<%= fi.ip %>)</td>
+        <% end %>
+        <td><%= fi.last_entry_tps %></td>
+        <td><%= fi.last_exit_tps %></td>
+        <td><%= fi.max_entry_tps %></td>
+        <td><%= fi.max_exit_tps %></td>
+        <td><%= "#{time_ago_in_words(fi.updated_at)} ago " %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

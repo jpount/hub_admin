@@ -1,0 +1,25 @@
+  <div class="row-fluid">
+    <div class="span12">
+      <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+          <th>Key</th>
+          <th>xml</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @results.nil? %>
+            <tr>
+              <td colspan="2">No records</td>
+            </tr>
+        <% else %>
+                <tr>
+                  <td><%= @results.id %></td>
+                  <td><%= @results.xml %></td>
+                </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+

@@ -1,0 +1,27 @@
+<h4>FI Clients</h4>
+<hr/>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h5>Active FIs <span style="color: #5BB75B; font-size:12px; font-weight:normal; padding-left:10px;">These FIs have sent a recent ping message</span></h5>
+  </div>
+</div>
+<%= render "list", {:fis => @fis} %>
+
+<hr/>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h5>Inactive FIs <span style="color: #FC5B5E; font-size:12px; font-weight:normal; padding-left:10px;">These FIs have not sent a ping message for a while. Check that they are still active</span></h5>
+  </div>
+</div>
+
+<%= render "list", {:fis => @inactive_fis} %>
+
+<%= form_tag("/admin/metrics/deleteall") do %>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag 'Delete All', :class => "btn btn-danger" %>
+      </div>
+    </div>
+<% end %>

@@ -1,0 +1,85 @@
+   <% if !data.nil? && data.size > 0 %>
+    <div id="container<%= name %>" style="min-width: 500px; height: 500px; margin: 0 auto"></div>
+
+    <script>
+        $(function () {
+            $('#container<%= name %>').highcharts({
+                title: {
+                    text: 'API Metrics - <%= name %>',
+                    x: -20 //center
+                },
+                xAxis: {
+                    title: {
+                        text: 'Samples'
+                    },
+                    categories: [
+                    <%
+                       i = 1
+                       while i <= cats do
+                    %>
+                           '<%= i.to_s %>'<%= ',' if i < cats %>
+                    <%
+                         i +=1
+                       end
+                    %>
+                    ]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Transactions'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ' txns'
+                },
+                legend: {
+                    layout: 'horizontal',
+                    align: 'bottom',
+                    verticalAlign: 'bottom',
+                    borderWidth: 0
+                },
+                series: [
+                    <% if data.size > 0 %>
+                      <%
+                         ip = data.first.ip
+                         last_tps_cnt = 0
+                         last_tps_date = ""
+                         tot_arr = []
+                         data.each do |met|
+                           if ip != met.ip
+                      %>
+                    {
+                        name: 'Total - <%= ip %>',
+                        data: <%= tot_arr.to_s %>
+                    },
+                      <%
+                             tot_arr.clear
+                             tot_arr << met.total_count
+                             ip = met.ip
+                           else
+                             tot_arr << met.total_count
+                           end
+                      %>
+                      <% end %>
+                    {
+                        name: 'Total - <%= ip %>',
+                        data: <%= tot_arr.to_s %>
+                    }
+                    <% else %>
+                    {}
+                    <% end %>
+                ]
+            });
+        });
+    </script>
+   <% else %>
+       <div id="container<%= name %>" style="min-width: 500px; height: 500px; margin: 0 auto">
+         <p class="text-center"><strong>API Metrics - <%= name %></strong></p>
+         <p class="text-center">No metrics data exist at this time</p>
+       </div>
+   <% end %>

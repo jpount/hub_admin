@@ -1,0 +1,23 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="<%= root_path %>">Payment Admin</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><a data-no-turbolink='true' href="<%= admin_stats_path %>">Quick Stats</a></li>
+          <li><a href="<%= apimetrics_path %>">API Metrics</a></li>
+          <li><a href="<%= fimetrics_path %>">FI Metrics</a></li>
+          <li><a href="<%= admin_cassie_path %>">DataStore</a></li>
+        </ul>
+        <ul class="nav" style="float:right;">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="<%= rails_admin_path %>">Configuration</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<%= render "header" %>
+
+    <div class="row-fluid">
+      <div class="span6 well">
+        <%= render "chart", {:name => "008In", :data => @latest008InMetrics, :cats => @max008In } %>
+      </div>
+      <div class="span6 well">
+        <%= render "chart", {:name => "008Out", :data => @latest008OutMetrics, :cats => @max008Out } %>
+      </div>
+    </div>
+
+
+

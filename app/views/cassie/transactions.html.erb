@@ -1,0 +1,46 @@
+<h3>Data Store - transactions</h3>
+
+<%= render "connect" %>
+
+<div class="tab-pane active" id="#transactions">
+  <div class="row-fluid">
+    <div class="span12">
+      <% if @results %>
+          <h4 class="heading">Transaction count = 1</h4>
+      <% else %>
+          <h4 class="heading">Transaction count = <%= @countTxn %></h4>
+      <% end %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span3">
+      <%= form_tag("/admin/cassie/search") do %>
+          <div class="control-group">
+            <label class="control-label" for="inputNimbusDNS">Key</label>
+            <div class="controls">
+              <%= text_field_tag :key %>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <%= submit_tag 'Go', :class => "btn" %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <div class="span9">
+      <div class="well">
+        <p>
+          Search for a record in the system using the record ID/Key
+        </p>
+        <p>
+          Must be exact match - other searching not available at this time.
+        </p>
+      </div>
+    </div>
+  </div>
+  <% if @results %>
+      <%= render "results" %>
+  <% end %>
+</div>
+

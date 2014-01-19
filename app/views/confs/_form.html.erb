@@ -1,0 +1,75 @@
+<%= form_for(@conf, html: { class: "form-horizontal" }) do |f| %>
+  <% if @conf.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@conf.errors.count, "error") %> prohibited this conf from being saved:</h2>
+
+      <ul>
+      <% @conf.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="control-group">
+      <label class="control-label" for="inputNimbusDNS">Nimbus DNS</label>
+      <div class="controls">
+        <%= f.text_field :nimbus_url %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputNimbusDNS">Cassie DNS</label>
+      <div class="controls">
+        <%= f.text_field :cassandra_url %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputFiPort">FI Port</label>
+      <div class="controls">
+        <%= f.text_field :fi_port %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputFiPort">Ping Interval</label>
+      <div class="controls">
+        <%= f.text_field :ping_interval %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputNimbusDNS">HAProxy URL</label>
+      <div class="controls">
+        <%= f.text_field :hap_url %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputFiPort">HAProxy user</label>
+      <div class="controls">
+        <%= f.text_field :hap_user %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputFiPort">HAProxy Password</label>
+      <div class="controls">
+        <%= f.password_field :hap_pwd %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputNimbusDNS">Ganglia URL</label>
+      <div class="controls">
+        <%= f.text_field :ganglia_url %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputFiPort">Ganglia host</label>
+      <div class="controls">
+        <%= f.text_field :ganglia_host %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit :class => "btn btn-primary" %>
+      </div>
+    </div>
+
+<% end %>

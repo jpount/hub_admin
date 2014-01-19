@@ -1,0 +1,30 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: hub_admin_development
+  pool: 5
+  username: root
+  password: admin
+  read_timeout: 180
+  write_timeout: 180
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: hub_admin_test
+  pool: 5
+  username: root
+  password: admin
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: true
+  database: hub_admin_production
+  pool: 20
+  username: root
+  password:
+  host: 127.0.0.1
+  port: 3306

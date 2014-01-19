@@ -1,0 +1,61 @@
+<h4>Data Store - Endpoints</h4>
+
+<%= render "connect" %>
+
+<div class="tab-pane active" id="#endpoints">
+
+<h5 class="heading">Configured Endpoints</h5>
+<div class="row-fluid">
+  <div class="span6">
+    <h5 class="heading">Endpoints 008 (<%= @count008 %>)</h5>
+    <table class="table table-condensed table-hover">
+      <thead>
+      <tr>
+        <th>Key</th>
+        <th>Endpoint</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if @ep008s.nil? || @ep008s.size < 1 %>
+          <tr>
+            <td colspan="2">No records</td>
+          </tr>
+      <% else %>
+          <% @ep008s.each do |ep8| %>
+           <tr>
+              <td><%= ep8.id %></td>
+              <td><%= ep8.endpoint %></td>
+           </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="span6">
+    <h5 class="heading">Endpoints 002 (<%= @count002 %>)</h5>
+    <table class="table table-condensed table-hover">
+      <thead>
+      <tr>
+        <th>Key</th>
+        <th>Endpoint</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if @ep002s.nil? || @ep002s.size < 1 %>
+          <tr>
+            <td colspan="2">No records</td>
+          </tr>
+      <% else %>
+          <% @ep002s.each do |ep2| %>
+              <tr>
+                <td><%= ep2.id %></td>
+                <td><%= ep2.endpoint %></td>
+              </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>

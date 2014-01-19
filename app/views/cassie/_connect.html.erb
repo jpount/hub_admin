@@ -1,0 +1,31 @@
+<div id="tabs">
+  <ul class="nav nav-tabs">
+  <li><a href="<%= admin_cassie_path %>">Endpoints</a></li>
+  <li><a href="<%= admin_cassie_transactions_path %>">Transactions</a></li>
+  <li><a href="<%= admin_cassie_transaction_errors_path %>">Errors</a></li>
+</ul>
+</div>
+
+<div class="row-fluid">
+  <div class="span8">
+    <div class="well">
+    <p>
+      <% if @connected == true %>
+          <span class="label label-success">Connected</span> to the hub datastore (<%= get_cassandra_url %>)
+    <% else %>
+          <span>
+          <%= form_tag("/admin/cassie/connect") do %>
+              <div class="control-group">
+                <div class="controls">
+                  <%= submit_tag 'Connect', :class => "btn btn-sml btn-danger" %>
+                <span> to the hub datastore (<%= get_cassandra_url %>) to view data </span>
+                </div>
+              </div>
+          <% end %>
+          </span>
+      <% end %>
+    </p>
+    </div>
+  </div>
+</div>
+

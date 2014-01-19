@@ -1,0 +1,25 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <td>Display Name</td>
+    <th>URL</th>
+    <th>Type</th>
+    <th>Last Ping</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% apis.each do |api_name| %>
+      <tr>
+        <td><%= api_name.display_name %></td>
+        <td><%= api_name.url %></td>
+        <td><%= api_name.api_type %></td>
+        <td><%= "#{time_ago_in_words(api_name.last_ping)} ago " %></td>
+        <td><%= link_to 'Show', api_name, class: "btn btn-mini" %>
+            <%= link_to 'Edit', edit_api_path(api_name), class: "btn btn-mini btn-primary" %>
+            <%= link_to 'Destroy', api_name, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger", style: "color:white;" %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

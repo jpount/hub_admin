@@ -1,0 +1,55 @@
+<%= form_for(@fi, html: { class: "form-horizontal" }) do |f| %>
+  <% if @fi.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fi.errors.count, "error") %> prohibited this fi from being saved:</h2>
+      <ul>
+      <% @fi.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">URL</label>
+      <div class="controls">
+        <%= f.text_field :url, :value => @fi.url %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">ALT URL</label>
+      <div class="controls">
+        <%= f.text_field :alt_url, :value => @fi.alt_url %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">Display Name</label>
+      <div class="controls">
+        <%= f.text_field :display_name, :value => @fi.display_name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">Type</label>
+      <div class="controls">
+        <%= f.select :fi_type, ['SENDER', 'RECEIVER'], :include_blank => true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputLastPing">Last Ping</label>
+      <div class="controls">
+        <%= f.text_field :last_ping, :value => @fi.last_ping %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputURLl">Ignore?</label>
+      <div class="controls">
+        <%= f.check_box :ignore, :value => @fi.ignore %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit :class => "btn btn-primary" %>
+      </div>
+    </div>
+
+<% end %>

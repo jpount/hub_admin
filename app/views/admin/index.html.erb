@@ -1,0 +1,108 @@
+<h3>Home</h3>
+
+<div class="row-fluid">
+  <div class="span8">
+    <div class="well">
+    <p class="lead">
+      To get started register some FI clients with this application.
+    </p>
+    <p>
+      Once they are registered, clients will appear in the the list below. You can then tell them to start sending requests to the API
+      using the form on the right.
+    </p>
+    <hr/>
+    <p>
+      Enter the number of requests you want each FI to send &amp; a code ie "CBA".
+    </p>
+    <p>
+      If You add a TPS value then the FI will send the specified number of requests per second and if you add a delay
+      then a delay will occur between each load of TPS sends
+    </p>
+    <p>
+      Press "Go" to begin
+    </p>
+    <hr/>
+    <p>
+      Once you have started go to the dashboard or metric pages to see results coming through.
+    </p>
+    </div>
+  </div>
+  <div class="span4">
+    <%= form_tag("/admin/launch", :class => "well") do %>
+        <div class="control-group">
+          <label class="control-label" for="inputNimbusDNS">Requests</label>
+          <div class="controls">
+            <%= text_field_tag :request_count %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputNimbusDNS">FI Code</label>
+          <div class="controls">
+            <%= text_field_tag :fi_code %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputNimbusDNS">TPS</label>
+          <div class="controls">
+            <%= text_field_tag :tps %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputNimbusDNS">Delay (Secs)</label>
+          <div class="controls">
+            <%= text_field_tag :delay %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <%= submit_tag 'Go', :class => "btn btn-danger" %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<hr/>
+
+<div class="row-fluid">
+  <div class="span6" id="user-list">
+    <h4 class="heading">Active FIs</h4>
+    <ul class="list user_list">
+      <% if @fis.size < 1 %>
+          <li>
+            <span class="label label-important pull-right sl_status">offline</span>
+            No registered FIs<br>
+          </li>
+      <% else %>
+          <% @fis.each do |fi| %>
+              <li>
+                <span class="label label-success pull-right sl_status">online</span>
+                <a href="#" class="sl_name"><%= fi.display_name %></a><br>
+              </li>
+          <% end %>
+      <% end %>
+    </ul>
+    <a href="<%= fis_path %>" class="btn btn-small btn-primary">Show All</a><br>
+  </div>
+
+  <div class="span6" id="user-list">
+    <h4 class="heading">Active APIs</h4>
+    <ul class="list user_list">
+      <% if @apis.size < 1 %>
+          <li>
+            <span class="label label-important pull-right sl_status">offline</span>
+            No registered APIs<br>
+          </li>
+      <% else %>
+          <% @apis.each do |api| %>
+              <li>
+                <span class="label label-success pull-right sl_status">online</span>
+                <a href="#" class="sl_name"><%= api.display_name %></a><br>
+              </li>
+          <% end %>
+      <% end %>
+    </ul>
+    <a href="<%= apis_path %>" class="btn btn-small btn-primary">Show All</a><br>
+  </div>
+
+</div>

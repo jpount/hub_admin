@@ -1,0 +1,55 @@
+    <h5>API Totals</h5>
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="alert alert-info">
+          <span class="badge pull-right success"><%= @totalCount %></span>
+          Total Count
+        </div>
+      </div>
+      <div class="span4">
+        <div class="alert alert-success">
+          <span class="badge pull-right"><%= @SuccessCount %></span>
+          Success Count
+        </div>
+      </div>
+      <div class="span4">
+        <div class="alert alert-danger">
+          <span class="badge pull-right"><%= @ErrorCount %></span>
+          Error Count
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <h5>Message details</h5>
+    <div class="row-fluid">
+      <div class="span12">
+        <table class="table table-condensed table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Total</th>
+            <th>Success</th>
+            <th>Errors</th>
+            <th>IP</th>
+            <th>TPS last Entry</th>
+            <th>TPS last Exit</th>
+            <th>TPS Max Entry</th>
+            <th>TPS Max Exit</th>
+            <th>Updated</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= render "text_metrics_section", {:sum_metrics => @pac008In, :metrics => @latest008InMetrics } %>
+          <%= render "text_metrics_section", {:sum_metrics => @pac008Out, :metrics => @latest008OutMetrics } %>
+          <%= render "text_metrics_section", {:sum_metrics => @pac002In, :metrics => @latest002InMetrics } %>
+          <%= render "text_metrics_section", {:sum_metrics => @pac002Out, :metrics => @latest002OutMetrics } %>
+          </tbody>
+        </table>
+        <div class="control-group" style="margin-top:10px;">
+          <div class="controls">
+            <a href="<%= apimetrics_deleteall_path %>" class="btn btn-small btn-primary">Delete Metrics</a>
+            <a href="<%= apimetrics_reset_path %>" class="btn btn-small btn-primary">Reset APIs</a>
+          </div>
+        </div>
+      </div>
+    </div>

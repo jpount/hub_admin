@@ -1,0 +1,35 @@
+<h3>Listing Configs</h3>
+
+<div class="alert alert-info">The configuration allows you to maintain a variety of settings for the admin console</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Nimbus DNS</th>
+      <th>Cassie DNS</th>
+      <th>FI Port</th>
+      <th>Ping Interval</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @confs.each do |conf| %>
+      <tr>
+        <td><%= conf.nimbus_url %></td>
+        <td><%= conf.cassandra_url %></td>
+        <td><%= conf.fi_port %></td>
+        <td><%= conf.ping_interval %></td>
+        <td>
+           <%= link_to 'Edit', edit_conf_path(conf), class: "btn btn-mini btn-primary" %>
+           <%= link_to 'Destroy', conf, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger", style: "color:white;" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if @confs.nil? || @confs.size == 0 %>
+    <%= link_to 'New Config', new_conf_path, class: "btn btn-small btn-primary" %>
+<% end %>

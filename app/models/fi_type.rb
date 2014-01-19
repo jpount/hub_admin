@@ -1,0 +1,9 @@
+class FiType
+
+  BLANK = ""
+  SENDER = "SENDER"
+  RECEIVER = "RECEIVER"
+
+  ALL_TYPES = [BLANK, SENDER, RECEIVER]
+
+end

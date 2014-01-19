@@ -1,0 +1,28 @@
+<h4>APIs</h4>
+<hr/>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h5>Active APIs <span style="color: #5BB75B; font-size:12px; font-weight:normal; padding-left:10px;">These APIs have sent a recent ping message and are registered</span></h5>
+  </div>
+</div>
+
+<%= render "list", {:apis => @apis} %>
+
+<hr/>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h5>Inactive APIs <span style="color: #FC5B5E; font-size:12px; font-weight:normal; padding-left:10px;">These APIs have not sent a ping message for a while. Check that they are still active</span></h5>
+  </div>
+</div>
+
+<%= render "list", {:apis => @inactive_apis} %>
+
+<%= form_tag("/admin/apis/deleteall") do %>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag 'Delete All', :class => "btn btn-danger" %>
+      </div>
+    </div>
+<% end %>
