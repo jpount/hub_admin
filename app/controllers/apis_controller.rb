@@ -73,7 +73,7 @@ class ApisController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def api_params
-    params[:api].permit(:id, :url, :last_ping, :alt_url, :ignore, :display_name, :api_type)
+    params[:api].permit(:id, :url, :last_ping, :alt_url, :display_name, :api_type)
   end
 
 end

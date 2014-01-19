@@ -28,12 +28,12 @@ class HaproxyStatsService
               hap.high_reqs = row['req_rate_max'].to_i
               hap.tot_reqs = row['req_tot'].to_i
               hap.status = row['status']
-              hap.resp_100_rc = row['resp_100_rc'].to_i
-              hap.resp_200_rc = row['resp_200_rc'].to_i
-              hap.resp_300_rc = row['resp_300_rc'].to_i
-              hap.resp_400_rc = row['resp_400_rc'].to_i
-              hap.resp_500_rc = row['resp_500_rc'].to_i
-              hap.resp_other_rc = row['resp_other_rc'].to_i
+              hap.resp_100_rc = row['hrsp_1xx'].to_i
+              hap.resp_200_rc = row['hrsp_2xx'].to_i
+              hap.resp_300_rc = row['hrsp_3xx'].to_i
+              hap.resp_400_rc = row['hrsp_4xx'].to_i
+              hap.resp_500_rc = row['hrsp_5xx'].to_i
+              hap.resp_other_rc = row['hrsp_other'].to_i
               stats << hap
             end
           end

@@ -17,7 +17,7 @@ class AdminController < ApplicationController
       redirect_to root_path, alert: 'If entered then both TPS and Delay must be entered'
     else
       @fis.each do |fi|
-        if fi.ignore != true
+        if fi.fi_type == "SENDER"
           begin
             start_fi(fi, num_reqs, code, tps, delay_secs)
           rescue => e

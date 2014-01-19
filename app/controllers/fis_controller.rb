@@ -75,7 +75,7 @@ class FisController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def fi_params
-    params[:fi].permit(:id, :url, :last_ping, :alt_url, :ignore, :display_name, :fi_type, :fi_org)
+    params[:fi].permit(:id, :url, :last_ping, :alt_url, :display_name, :fi_type, :fi_org)
   end
 
 end
