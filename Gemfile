@@ -1,10 +1,13 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
+gem 'rails', "~> 4.0.1"
 
 gem "rails_admin"
 gem "devise"
+
+# required by newrelic_api gem
+gem "activeresource", "~> 4.0.0"
 
 gem "sass-rails", "~> 4.0.0"
 gem "bootstrap-sass", "~> 2.3.2"

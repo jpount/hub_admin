@@ -1,6 +1,6 @@
 class CassieController < ApplicationController
 
-  before_action :check_connection, only: [:index, :transactions]
+  before_action :check_connection, only: [:index, :transactions, :transaction_errors]
 
   def index
     begin

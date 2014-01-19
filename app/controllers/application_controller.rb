@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
 
   def get_cassandra_url
     cassandra = !Conf.first.nil? ? Conf.first.cassandra_url : "localhost"
-    puts "cassandra: " + cassandra
   end
 
   def get_conf
