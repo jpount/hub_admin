@@ -72,6 +72,7 @@ HubAdmin::Application.routes.draw do
   #
   # Dashboard
   #
+  get 'dashboard' => 'dashboards#index'
   get 'lb_stats' => 'dashboards#lb_stats'
   get 'total_008_in' => 'dashboards#get_008_in_count'
   get 'total_008_out' => 'dashboards#get_008_out_count'

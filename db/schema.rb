@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140119172100) do
+ActiveRecord::Schema.define(version: 20140120194300) do
 
   create_table "api_metrics", force: true do |t|
     t.integer  "api_id"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140119172100) do
     t.string   "display_name"
     t.string   "fi_type",      default: "SENDER"
     t.string   "fi_org",       default: "CBA"
+    t.boolean  "ignore",       default: false
   end
 
   add_index "fis", ["display_name"], name: "index_fi_on_display_name", using: :btree

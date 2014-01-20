@@ -1,0 +1,22 @@
+          <%
+             tot = 0
+             errs = 0
+             success = 0
+             name = ""
+          %>
+          <% metrics.each do |met| %>
+              <%
+                 tot = tot + met.total_count
+                 errs = errs + met.error_count
+                 success = success + met.success_count
+                 name = success + met.msg_name
+              %>
+          <% end %>
+          <% if metrics.size > 0 %>
+              <tr>
+                <td><%= name %></td>
+                <td><%=tot %></td>
+                <td style="color:green"><%= success %></td>
+                <td style="color:red"><%= errs %></td>
+              </tr>
+          <% end %>

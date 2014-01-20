@@ -1,6 +1,12 @@
 class DashboardsController < ApplicationController
   protect_from_forgery
 
+  def index
+    stats
+    apis
+    fis
+  end
+
   def lb_stats
     stats = []
     haproxy_stats = []
@@ -90,6 +96,29 @@ class DashboardsController < ApplicationController
     db_cnt.counter = type
     db_cnt.value = ApiMetric.get_safe_total(name, type)
     db_cnt
+  end
+
+  def stats
+    @haproxy_stats = []
+    error = ""
+    begin
+      haproxy = HaproxyStatsService.new(params)
+      @haproxy_stats = haproxy.get_stats
+    rescue => e
+      error = "Could not get stats: " + e.message
+    end
+  end
+
+  def apis
+    @latest008InMetrics = ApiMetric.get_latest_metrics("pacs008In")
+    @latest008OutMetrics = ApiMetric.get_latest_metrics("pacs008Out")
+    @latest002InMetrics = ApiMetric.get_latest_metrics("pacs002In")
+    @latest002OutMetrics = ApiMetric.get_latest_metrics("pacs002Out")
+  end
+
+  def fis
+    timeout = get_timeout
+    @fis = Metric.get_valid_metrics(timeout)
   end
 
 end

@@ -6,20 +6,19 @@ class AdminController < ApplicationController
   end
 
   def launch
-    code = params[:fi_code]
     num_reqs = params[:request_count]
     tps = params[:tps]
     delay_secs = params[:delay]
     errors = false
-    if (code.blank? || num_reqs.blank?)
-      redirect_to root_path, alert: 'Both Requests and FI Code must be entered'
+    if (num_reqs.blank?)
+      redirect_to root_path, alert: 'No of Requests must be entered'
     elsif ((tps.blank? && !delay_secs.blank?) || (!tps.blank? && delay_secs.blank?))
       redirect_to root_path, alert: 'If entered then both TPS and Delay must be entered'
     else
       @fis.each do |fi|
-        if fi.fi_type == "SENDER"
+        if fi.fi_type == "SENDER" && !fi.ignore?
           begin
-            start_fi(fi, num_reqs, code, tps, delay_secs)
+            start_fi(fi, num_reqs, fi.fi_org, tps, delay_secs)
           rescue => e
             errors = true
           end

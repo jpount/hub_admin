@@ -12,14 +12,11 @@
     </p>
     <hr/>
     <p>
-      Enter the number of requests you want each FI to send &amp; a code ie "CBA".
+      Enter the number of requests you want each FI to send. Each sender will send messages to the other two FIs
     </p>
     <p>
       If You add a TPS value then the FI will send the specified number of requests per second and if you add a delay
       then a delay will occur between each load of TPS sends
-    </p>
-    <p>
-      Press "Go" to begin
     </p>
     <hr/>
     <p>
@@ -33,12 +30,6 @@
           <label class="control-label" for="inputNimbusDNS">Requests</label>
           <div class="controls">
             <%= text_field_tag :request_count %>
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label" for="inputNimbusDNS">FI Code</label>
-          <div class="controls">
-            <%= text_field_tag :fi_code %>
           </div>
         </div>
         <div class="control-group">

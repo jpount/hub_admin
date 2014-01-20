@@ -1,0 +1,27 @@
+    <h5>API Counts</h5>
+    <div class="row-fluid">
+      <div class="span12">
+        <table class="table table-condensed table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Total</th>
+            <th>Success</th>
+            <th>Errors</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% if (@latest008InMetrics.size > 0 || @latest008OutMetrics.size > 0 || @latest002InMetrics.size > 0 || @latest002OutMetrics.size > 0) %>
+          <%= render "api_metrics_rows", {:metrics => @latest008InMetrics } %>
+          <%= render "api_metrics_rows", {:metrics => @latest008OutMetrics } %>
+          <%= render "api_metrics_rows", {:metrics => @latest002InMetrics } %>
+          <%= render "api_metrics_rows", {:metrics => @latest002OutMetrics } %>
+          <% else %>
+            <tr>
+              <td colspan="4">No API details available at this time</td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>

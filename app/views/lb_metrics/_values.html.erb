@@ -1,4 +1,4 @@
-    <h5>LB Totals</h5>
+    <h5>Load Balancers</h5>
     <div class="row-fluid">
       <div class="span12">
         <table class="table table-condensed table-hover">
@@ -13,6 +13,9 @@
           </tr>
           </thead>
           <tbody>
+          <% if @haproxy_stats.size < 1 %>
+          <tr><td colspan="6">No load balancer details available at this time</td></tr>
+          <% else %>
           <% @haproxy_stats.each do |stat| %>
           <tr>
             <td><%= stat.lb_name %></td>
@@ -22,6 +25,7 @@
             <td><%= stat.high_reqs %></td>
             <td><%= stat.tot_reqs %></td>
           </tr>
+          <% end %>
           <% end %>
           </tbody>
         </table>

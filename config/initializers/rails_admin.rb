@@ -70,12 +70,16 @@ RailsAdmin.config do |config|
 
   #   # Section specific configuration:
 
-  #    list do
+      list do
+        field :display_name
+        field :api_type
+        field :url
+        field :last_ping
   #       filters [:id, :name, :display_name]  # Array of field names which filters should be shown by default in the table header
   #       items_per_page 100    # Override default_items_per_page
   #       sort_by :id           # Sort column (default is primary key)
   #       sort_reverse true     # Sort direction (default is true for primary key, last created first)
-  #    end
+      end
   #     show do; end
   #     edit do; end
   #     export do; end
@@ -202,12 +206,18 @@ RailsAdmin.config do |config|
 
   #   # Section specific configuration:
 
-  #     list do
+      list do
+        field :display_name
+        field :fi_type
+        field :fi_org
+        field :ignore
+        field :url
+        field :last_ping
   #       # filters [:id, :name]  # Array of field names which filters should be shown by default in the table header
   #       # items_per_page 100    # Override default_items_per_page
   #       # sort_by :id           # Sort column (default is primary key)
   #       # sort_reverse true     # Sort direction (default is true for primary key, last created first)
-  #     end
+      end
   #     show do; end
   #     edit do; end
   #     export do; end
