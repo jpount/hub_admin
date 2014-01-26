@@ -1,3 +1,4 @@
+<div id="lb_metrics">
     <h5>Load Balancers</h5>
     <div class="row-fluid">
       <div class="span12">
@@ -13,6 +14,7 @@
           </tr>
           </thead>
           <tbody>
+          <% if @haproxy_stats %>
           <% if @haproxy_stats.size < 1 %>
           <tr><td colspan="6">No load balancer details available at this time</td></tr>
           <% else %>
@@ -27,7 +29,9 @@
           </tr>
           <% end %>
           <% end %>
+          <% end %>
           </tbody>
         </table>
       </div>
     </div>
+</div>

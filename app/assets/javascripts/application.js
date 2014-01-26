@@ -19,3 +19,4 @@
 //= require highcharts/modules/exporting
 //= require highcharts/themes/gray
 //= require ./fis
+//= require ./dashboard

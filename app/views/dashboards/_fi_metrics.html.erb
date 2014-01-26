@@ -1,3 +1,4 @@
+<div id="fi_metrics">
     <h5>FI Counts</h5>
     <div class="row-fluid">
       <div class="span12">
@@ -14,7 +15,7 @@
           </tr>
           </thead>
           <tbody>
-          <% if @fis.size > 0 %>
+          <% if @fis && @fis.size > 0 %>
           <% @fis.each do |fi| %>
               <tr>
                 <td><%= fi.msg_name %></td>
@@ -41,4 +42,11 @@
           </tbody>
         </table>
       </div>
+      <hr/>
+      <div class="row-fluid">
+        <div class="span12">
+          <a href="<%= dashboard_fi_reset_path %>" class="btn btn-small btn-primary">Delete and Reset Metrics</a>
+        </div>
+      </div>
     </div>
+</div>

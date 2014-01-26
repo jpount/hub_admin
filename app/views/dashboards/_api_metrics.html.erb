@@ -1,3 +1,4 @@
+<div id="api_metrics">
     <h5>API Counts</h5>
     <div class="row-fluid">
       <div class="span12">
@@ -11,7 +12,7 @@
           </tr>
           </thead>
           <tbody>
-          <% if (@latest008InMetrics.size > 0 || @latest008OutMetrics.size > 0 || @latest002InMetrics.size > 0 || @latest002OutMetrics.size > 0) %>
+          <% if ((@latest008InMetrics && @latest008InMetrics.size > 0) || (@latest008OutMetrics && @latest008OutMetrics.size > 0) || (@latest002InMetrics && @latest002InMetrics.size > 0) || (@latest002OutMetrics && @latest002OutMetrics.size > 0)) %>
           <%= render "api_metrics_rows", {:metrics => @latest008InMetrics } %>
           <%= render "api_metrics_rows", {:metrics => @latest008OutMetrics } %>
           <%= render "api_metrics_rows", {:metrics => @latest002InMetrics } %>
@@ -24,4 +25,11 @@
           </tbody>
         </table>
       </div>
+      <hr/>
+      <div class="row-fluid">
+        <div class="span12">
+          <a href="<%= dashboard_api_reset_path %>" class="btn btn-small btn-primary">Delete and Reset Metrics</a>
+        </div>
+      </div>
     </div>
+</div>

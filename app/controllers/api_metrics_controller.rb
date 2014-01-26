@@ -62,21 +62,15 @@ class ApiMetricsController < ApplicationController
   end
 
   def delete_all
-    ApiMetric.clear_metrics
+    apimetrics_service = ApiMetricsService.new()
+    apimetrics_service.clear_metrics
     redirect_to apimetrics_path, notice: 'Deleted all API metric data'
   end
 
   def reset_api_metrics
-    apis = Api.get_valid_apis(get_timeout)
-    errors = false
-    apis.each do |api|
-      begin
-        reset_metrics(api)
-      rescue => e
-        errors = true
-      end
-    end
-    msg = 'Resetting API counts'
+    apimetrics_service = ApiMetricsService.new()
+    errors = apimetrics_service.reset_apis(get_timeout)
+    msg = 'Resetting API metrics'
     msg = msg + " (errors encountered)" if errors
     redirect_to apimetrics_path, notice: msg
   end
@@ -114,31 +108,6 @@ class ApiMetricsController < ApplicationController
     @latest002OutMetrics = ApiMetric.get_latest_metrics("pacs002Out")
   end
 
-  def reset_metrics api
-    # reset the api_metrics
-    begin
-      if !api.url.blank?
-        port = ":8080"
-        conn = get_connection()
-        if api.api_type == "IN"
-          api_in_tfr_url = build_base_url(api.url, port) + "/hub-payment-consumer/paymentHub/consumer/transfer/admin/reset"
-          api_in_stlmt_url = build_base_url(api.url, port) + "/hub-payment-consumer/paymentHub/consumer/settlement/admin/reset"
-          send_msg conn, api_in_tfr_url
-          send_msg conn, api_in_stlmt_url
-        elsif api.api_type == "OUT"
-          api_out_tfr_url = build_base_url(api.url, port) + "/hub-payment-producer/paymentHub/producer/transfer/admin/reset"
-          api_out_stlmt_url = build_base_url(api.url, port) + "/hub-payment-producer/paymentHub/producer/settlement/admin/reset"
-          send_msg conn, api_out_tfr_url
-          send_msg conn, api_out_stlmt_url
-        end
-      end
-    rescue => e
-      err = "Could not reset api metrics : " + e.message
-      logger.error(err)
-      raise "Error resetting api metrics"
-    end
-  end
-
   def get_max_points name
     max = 0
     ip_points = ApiMetric.get_max_points(name)
@@ -148,14 +117,6 @@ class ApiMetricsController < ApplicationController
       end
     end
     max
-  end
-
-  def send_msg cxn, send_url
-    response = cxn.post do |req|
-      req.url send_url
-      req.options[:timeout] = 20
-      req.options[:open_timeout] = 20
-    end
   end
 
 end

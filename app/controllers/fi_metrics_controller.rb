@@ -41,20 +41,14 @@ class FiMetricsController < ApplicationController
   end
 
   def delete_all
-    Metric.clear_metrics
+    fimetrics_service = FiMetricsService.new()
+    fimetrics_service.clear_metrics
     redirect_to fimetrics_path, notice: 'Deleted all FI metric data'
   end
 
   def reset_fi_metrics
-    errors = false
-    @fis = Fi.get_valid_fis(get_timeout)
-    @fis.each do |fi|
-      begin
-        reset_metrics(fi)
-      rescue => e
-        errors = true
-      end
-    end
+    fimetrics_service = FiMetricsService.new()
+    errors = fimetrics_service.reset_fis(get_timeout)
     msg = 'Resetting FI metrics'
     msg = msg + " (errors encountered)" if errors
     redirect_to fimetrics_path, notice: msg
@@ -72,44 +66,6 @@ class FiMetricsController < ApplicationController
       @totalCount = @totalCount + fi.total_count
       @successCount = @successCount + fi.success_count
       @errorCount = @errorCount + fi.error_count
-    end
-  end
-
-  def reset_metrics fi
-    # reset the fi_metrics
-    port = ":8080"
-    begin
-      conn = get_connection()
-      if fi.fi_type == "SENDER"
-        send_msg conn, build_send_url(fi, port, "/paymentFI/admin/admin/reset", "/hub-payment-fi-admin")
-        send_msg conn, build_send_url(fi, port, "/paymentFI/settlement/receiver/admin/reset", "/hub-payment-fi-settlement-receiver")
-        send_msg conn, build_send_url(fi, port, "/paymentFI/transfer/sender/admin/reset", "/hub-payment-fi-transfer-sender")
-      elsif fi.fi_type == "RECEIVER"
-        send_msg conn, build_send_url(fi, port, "/paymentFI/transfer/receiver/admin/reset", "/hub-payment-fi-transfer-receiver")
-        send_msg conn, build_send_url(fi, port, "/paymentFI/settlement/sender/admin/reset", "/hub-payment-fi-transfer-receiver")
-      end
-    rescue => e
-      err = "Could not reset fi metrics : " + e.message
-      logger.error(err)
-      raise "Error resetting metrics"
-    end
-  end
-
-  def build_send_url fi, port, url_append, context
-    built_url = ""
-    if !fi.alt_url.blank?
-      built_url = build_base_url(fi.alt_url, port) + context + url_append
-    else
-      built_url = build_base_url(fi.url, port) + context + url_append
-    end
-    built_url
-  end
-
-  def send_msg cxn, send_url
-    response = cxn.post do |req|
-      req.url send_url
-      req.options[:timeout] = 20
-      req.options[:open_timeout] = 20
     end
   end
 

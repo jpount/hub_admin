@@ -73,6 +73,12 @@ HubAdmin::Application.routes.draw do
   # Dashboard
   #
   get 'dashboard' => 'dashboards#index'
+  get 'dashboard/fi_reset' => 'dashboards#reset_fis'
+  get 'dashboard/api_reset' => 'dashboards#reset_apis'
+  get 'dashboard/api_metrics' => 'dashboards#api_metrics'
+  get 'dashboard/fi_metrics' => 'dashboards#fi_metrics'
+  get 'dashboard/lb_metrics' => 'dashboards#lb_metrics'
+
   get 'lb_stats' => 'dashboards#lb_stats'
   get 'total_008_in' => 'dashboards#get_008_in_count'
   get 'total_008_out' => 'dashboards#get_008_out_count'
