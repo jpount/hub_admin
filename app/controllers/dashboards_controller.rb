@@ -23,7 +23,7 @@ class DashboardsController < ApplicationController
   end
 
   def fi_metrics
-    fis
+    #fis
     respond_to do |format|
       format.js {
       }
@@ -31,7 +31,7 @@ class DashboardsController < ApplicationController
   end
 
   def api_metrics
-    apis
+    #apis
     respond_to do |format|
       format.js {
       }
@@ -39,7 +39,7 @@ class DashboardsController < ApplicationController
   end
 
   def lb_metrics
-    stats
+    #stats
     respond_to do |format|
       format.js {
       }

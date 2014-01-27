@@ -15,7 +15,7 @@ class HaproxyStatsService
         proxy_type = lb.get_proxy_type
         proxy = lb.get_proxy
         begin
-          timeout(1) do
+          timeout(5) do
             CSV.parse(open( lb.url + "/;csv",:http_basic_authentication => [ lb.user_name, lb.password ]), :headers => true) do |row|
               next if proxy_type and proxy_type != row["svname"] # ensure the proxy type (if provided) matches
               next unless proxy.to_s.strip.downcase == row["# pxname"].downcase # ensure the proxy name matches
