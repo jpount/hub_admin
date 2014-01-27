@@ -19,5 +19,9 @@ class Metric < ActiveRecord::Base
     Metric.includes(:fi).where("updated_at >= ?", Time.now.ago(ping_timeout) ).order('ip, updated_at desc').all
   end
 
+  def self.get_dashboard_metrics ping_timeout
+    Metric.includes(:fi).where("updated_at >= ? and msg_name not like 'paymentInternal%'", Time.now.ago(ping_timeout) ).order('msg_name').all
+  end
+
 end
 

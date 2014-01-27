@@ -160,7 +160,7 @@ class DashboardsController < ApplicationController
 
   def fis
     timeout = get_timeout
-    @fis = Metric.get_valid_metrics(timeout)
+    @fis = Metric.get_dashboard_metrics(timeout)
   end
 
 end

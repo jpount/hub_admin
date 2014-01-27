@@ -9,8 +9,6 @@
             <th>Total</th>
             <th>Success</th>
             <th>Errors</th>
-            <th>Type</th>
-            <th>Who</th>
             <th>IP</th>
           </tr>
           </thead>
@@ -22,13 +20,6 @@
                 <td><%= fi.total_count %></td>
                 <td style="color:green"><%= fi.success_count %></td>
                 <td style="color:red"><%= fi.error_count %></td>
-                <%  if fi.fi.nil? %>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                <% else %>
-                    <td><%= fi.fi_type %></td>
-                    <td><%= fi.fi_org %></td>
-                <% end %>
                 <%  if fi.fi.nil? %>
                     <td><%= fi.ip %></td>
                 <% else %>
