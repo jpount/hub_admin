@@ -5,13 +5,8 @@ class DashboardsController < ApplicationController
     fis
     apis
     timeout = get_timeout
-    add_column :confs, :show_lb, :boolean, default: false
-    add_column :confs, :dashboard_refresh_ms, :integer, default: 5000
     @refresh_ms = get_refresh_ms
-    @show_lb_stats = get_show_lb_stats
-    if @show_lb_stats
-      stats
-    end
+    stats
   end
 
   def reset_fis
@@ -149,12 +144,15 @@ class DashboardsController < ApplicationController
 
   def stats
     @haproxy_stats = []
-    error = ""
-    begin
-      haproxy = HaproxyStatsService.new(params)
-      @haproxy_stats = haproxy.get_stats
-    rescue => e
-      error = "Could not get stats: " + e.message
+    @show_lb_stats = get_show_lb_stats
+    if @show_lb_stats
+      error = ""
+      begin
+        haproxy = HaproxyStatsService.new(params)
+        @haproxy_stats = haproxy.get_stats
+      rescue => e
+        error = "Could not get stats: " + e.message
+      end
     end
   end
 
