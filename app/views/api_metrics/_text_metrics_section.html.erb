@@ -57,10 +57,10 @@
                 <td style="color:green"><strong><%= success %></strong></td>
                 <td style="color:red"><strong><%= errs %></strong></td>
                 <td>&nbsp;</td>
-                <td><strong><%= (tps_last_entry / sum_metrics.size).round %></strong></td>
-                <td><strong><%= (tps_last_exit / sum_metrics.size).round %></strong></td>
-                <td><strong><%= (tps_max_entry / sum_metrics.size).round %></strong></td>
-                <td><strong><%= (tps_max_exit / sum_metrics.size).round %></strong></td>
+                <td><strong><%= tps_last_entry %></strong></td>
+                <td><strong><%= tps_last_exit %></strong></td>
+                <td><strong><%= tps_max_entry %></strong></td>
+                <td><strong><%= tps_max_exit %></strong></td>
                 <td>&nbsp;</td>
               </tr>
           <% end %>

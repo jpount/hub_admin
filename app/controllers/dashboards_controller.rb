@@ -4,7 +4,14 @@ class DashboardsController < ApplicationController
   def index
     fis
     apis
-    stats
+    timeout = get_timeout
+    add_column :confs, :show_lb, :boolean, default: false
+    add_column :confs, :dashboard_refresh_ms, :integer, default: 5000
+    @refresh_ms = get_refresh_ms
+    @show_lb_stats = get_show_lb_stats
+    if @show_lb_stats
+      stats
+    end
   end
 
   def reset_fis

@@ -10,6 +10,14 @@ class ApplicationController < ActionController::Base
     timeout = !Conf.first.nil? ? Conf.first.ping_interval * 2 : 120
   end
 
+  def get_show_lb_stats
+    show_stats = !Conf.first.nil? ? Conf.first.show_lb : false
+  end
+
+  def get_refresh_ms
+    refresh_ms = !Conf.first.nil? ? Conf.first.dashboard_refresh_ms : 5000
+  end
+
   def get_nimbus_url
     nimbus = !Conf.first.nil? ? Conf.first.nimbus_url : "localhost"
   end
