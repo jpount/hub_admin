@@ -3,20 +3,28 @@
              errs = 0
              success = 0
              name = ""
+             tps_max_entry = 0
+             tps_max_exit = 0
           %>
-          <% metrics.each do |met| %>
-              <%
+          <% metrics.each do |met|
                  tot = tot + met.total_count
                  errs = errs + met.error_count
                  success = success + met.success_count
                  name = met.msg_name
-              %>
-          <% end %>
+                 if !met.max_entry_tps.nil?
+                   tps_max_entry += met.max_entry_tps
+                 end
+                 if !met.max_exit_tps.nil?
+                   tps_max_exit += met.max_exit_tps
+                 end
+             end %>
           <% if metrics.size > 0 %>
               <tr>
                 <td><%= name %></td>
                 <td><%=tot %></td>
                 <td style="color:green"><%= success %></td>
                 <td style="color:red"><%= errs %></td>
+                <td><%=tps_max_entry %></td>
+                <td><%=tps_max_exit %></td>
               </tr>
           <% end %>
