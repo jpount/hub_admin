@@ -9,8 +9,9 @@ $(function () {
            }).done(function(data) {
                 $('#api_metrics').html(data);
            });
-    }, 4000);
+    }, 3000);
 
+/*
     setInterval(function() {
         $.ajax({
             url: "/dashboard/lb_metrics.js",
@@ -19,8 +20,8 @@ $(function () {
         }).done(function(data) {
                 $('#lb_metrics').html(data);
             });
-    }, 5000);
-
+    }, 3000);
+*/
     setInterval(function() {
         $.ajax({
             url: "/dashboard/fi_metrics.js",
@@ -29,6 +30,6 @@ $(function () {
         }).done(function(data) {
                 $('#fi_metrics').html(data);
             });
-    }, 6000);
+    }, 3000);
 
 });
