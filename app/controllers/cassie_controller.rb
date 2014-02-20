@@ -86,7 +86,7 @@ class CassieController < ApplicationController
   def check_connection
     @connected = true
     begin
-      @ep008s = Endpoints008.all
+      @ep008s = Endpoints008.first
     rescue => e
       @connected = false
     end

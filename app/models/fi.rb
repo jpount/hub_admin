@@ -30,6 +30,11 @@ class Fi < ActiveRecord::Base
     FiOrg::ALL_TYPES
   end
 
+  def self.get_by_url url
+    Fi.
+        where("url = ?", url).last
+  end
+
   def self.get_valid_fis ping_timeout
     Fi.where("last_ping >= ?", Time.now.ago(ping_timeout) ).order('display_name, last_ping desc').all
   end

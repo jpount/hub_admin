@@ -8,10 +8,7 @@ class ApiMetricsController < ApplicationController
       ip = params[:server]
       name = params[:name]
       if (!ip.blank? && !name.blank?)
-        @metric = ApiMetric.get_by_ip_and_msg_name(params[:server], params[:name])
-        if (@metric == nil)
-          @metric = ApiMetric.new
-        end
+        @metric = ApiMetric.new
         @metric.total_count = params[:total]
         @metric.success_count = params[:success]
         @metric.error_count = params[:error]
@@ -21,8 +18,9 @@ class ApiMetricsController < ApplicationController
         @metric.max_entry_tps = params["max-entry-tps"]
         @metric.last_exit_tps = params["last-exit-tps"]
         @metric.max_exit_tps = params["max-exit-tps"]
+        create_dashboard_metric(@metric, Api.get_by_url(params[:server]), "Api")
         error = false
-      else
+        else
         logger.warn("No ip and name specified: " + params.to_s)
       end
     rescue => e
@@ -37,8 +35,6 @@ class ApiMetricsController < ApplicationController
 
   def index
     get_common
-    get_008_common
-    get_002_common
   end
 
   def chartpacs008
@@ -93,9 +89,19 @@ class ApiMetricsController < ApplicationController
     @pac008Out = ApiMetric.get_by_name("pacs008Out")
     @pac002In = ApiMetric.get_by_name("pacs002In")
     @pac002Out = ApiMetric.get_by_name("pacs002Out")
-    @totalCount = ApiMetric.get_total
-    @ErrorCount = ApiMetric.get_error_count
-    @SuccessCount = ApiMetric.get_success_count
+  end
+
+  def get_common
+    timeout = get_timeout
+    @apis = DashboardMetric.get_valid_api_dashboard_metrics(timeout)
+    @totalCount = 0
+    @errorCount = 0
+    @successCount = 0
+    @apis.each do |api|
+      @totalCount = @totalCount + api.total_count
+      @successCount = @successCount + api.success_count
+      @errorCount = @errorCount + api.error_count
+    end
   end
 
   def get_008_common

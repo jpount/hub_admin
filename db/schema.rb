@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130183600) do
+ActiveRecord::Schema.define(version: 20140215154700) do
 
   create_table "api_metrics", force: true do |t|
     t.integer  "api_id"
@@ -57,6 +57,22 @@ ActiveRecord::Schema.define(version: 20140130183600) do
     t.string   "ganglia_host"
     t.boolean  "show_lb",              default: false
     t.integer  "dashboard_refresh_ms", default: 5000
+  end
+
+  create_table "dashboard_metrics", force: true do |t|
+    t.string   "metricable_type"
+    t.integer  "metricable_id"
+    t.integer  "total_count"
+    t.integer  "success_count"
+    t.integer  "error_count"
+    t.integer  "last_entry_tps"
+    t.integer  "last_exit_tps"
+    t.integer  "max_entry_tps"
+    t.integer  "max_exit_tps"
+    t.string   "ip"
+    t.string   "msg_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "dashboards", force: true do |t|

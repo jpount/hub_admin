@@ -21,11 +21,7 @@
         <td><%= fi.total_count %></td>
         <td style="color:green"><%= fi.success_count %></td>
         <td style="color:red"><%= fi.error_count %></td>
-        <%  if fi.fi.nil? %>
-            <td><%= fi.ip %></td>
-        <% else %>
-            <td><%= fi.fi.display_name %> (<%= fi.ip %>)</td>
-        <% end %>
+        <td><%= fi.ip %></td>
         <td><%= fi.last_entry_tps %></td>
         <td><%= fi.last_exit_tps %></td>
         <td><%= fi.max_entry_tps %></td>

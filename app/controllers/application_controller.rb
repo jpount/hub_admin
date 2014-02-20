@@ -57,5 +57,30 @@ class ApplicationController < ActionController::Base
     conn
   end
 
+  def create_dashboard_metric metric, existing_parent, override_type
+    if (metric && !metric.ip.empty? && !metric.msg_name.empty?)
+      @db_metric = DashboardMetric.get_by_ip_and_msg_name(metric.ip, metric.msg_name)
+      if @db_metric.nil?
+        @db_metric = DashboardMetric.new
+      end
+      if !existing_parent.nil?
+        @db_metric.metricable_type = existing_parent.class_name
+        @db_metric.metricable_id = existing_parent.id
+      else
+        @db_metric.metricable_type = override_type
+      end
+      @db_metric.total_count = metric.total_count
+      @db_metric.success_count = metric.success_count
+      @db_metric.error_count = metric.error_count
+      @db_metric.ip = metric.ip
+      @db_metric.msg_name = metric.msg_name
+      @db_metric.last_entry_tps = metric.last_entry_tps
+      @db_metric.max_entry_tps = metric.max_entry_tps
+      @db_metric.last_exit_tps = metric.last_exit_tps
+      @db_metric.max_exit_tps = metric.max_exit_tps
+      @db_metric.save
+    end
+  end
+
 end
 

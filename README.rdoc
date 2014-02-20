@@ -26,3 +26,11 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+Test apimetrics ...
+
+http://localhost:3000/admin/apimetrics/
+{"name":"pacs008Out","total":10,"success":9,"error":1,"last-entry-tps":10,"max-entry-tps":5,"last-exit-tps":10,"max-exit-tps":9,"server":"ec2-54-206-42-145.ap-southeast-2.compute.amazonaws.com"}
+
+http://localhost:3000/admin/fimetrics/
+{"name":"pacs008Out","total":10,"success":9,"error":1,"last-entry-tps":10,"max-entry-tps":5,"last-exit-tps":10,"max-exit-tps":9,"server":"ec2-54-206-42-145.ap-southeast-2.compute.amazonaws.com"}

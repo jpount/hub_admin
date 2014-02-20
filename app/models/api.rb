@@ -42,6 +42,11 @@ class Api < ActiveRecord::Base
     Api.delete_all
   end
 
+  def self.get_by_url url
+    Api.
+        where("url = ?", url).last
+  end
+
   def self.remove_dead_apis ping_timeout
     Api.where("last_ping < ?", Time.now.ago(ping_timeout)).delete_all
   end

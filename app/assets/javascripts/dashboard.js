@@ -11,17 +11,6 @@ $(function () {
            });
     }, 3000);
 
-/*
-    setInterval(function() {
-        $.ajax({
-            url: "/dashboard/lb_metrics.js",
-            context: document.body,
-            dataType : 'html'
-        }).done(function(data) {
-                $('#lb_metrics').html(data);
-            });
-    }, 3000);
-*/
     setInterval(function() {
         $.ajax({
             url: "/dashboard/fi_metrics.js",
@@ -29,6 +18,16 @@ $(function () {
             dataType : 'html'
         }).done(function(data) {
                 $('#fi_metrics').html(data);
+            });
+    }, 3000);
+
+    setInterval(function() {
+        $.ajax({
+            url: "/dashboard/dashboard_counts.js",
+            context: document.body,
+            dataType : 'html'
+        }).done(function(data) {
+                $('#dashboard_counts').html(data);
             });
     }, 3000);
 

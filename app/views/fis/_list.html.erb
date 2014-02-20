@@ -19,7 +19,6 @@
         <td><%= fi.ignore %></td>
         <td><%= "#{time_ago_in_words(fi.last_ping)} ago " %></td>
         <td>
-            <%= link_to 'Edit', edit_fi_path(fi), class: "btn btn-mini btn-primary" %>
             <%= link_to 'Destroy', fi, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger", style: "color:white;" %>
         </td>
       </tr>

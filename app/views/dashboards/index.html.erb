@@ -1,6 +1,12 @@
 <h3>Dashboard</h3>
 
-
+<div class="row-fluid">
+  <div class="span12">
+    <div class="well">
+      <%= render "dashboard_counts" %>
+    </div>
+  </div>
+</div>
 <div class="row-fluid">
   <div class="span12">
     <div class="well">
@@ -15,12 +21,3 @@
     </div>
   </div>
 </div>
-<% if @show_lb_stats %>
-<div class="row-fluid">
-  <div class="span12">
-    <div class="well">
-      <%= render "lb_metrics/values" %>
-    </div>
-  </div>
-</div>
-<% end %>

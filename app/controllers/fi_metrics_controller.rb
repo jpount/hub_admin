@@ -13,10 +13,7 @@ class FiMetricsController < ApplicationController
       ip = params[:server]
       name = params[:name]
       if (!ip.blank? && !name.blank?)
-        @metric = Metric.get_by_ip_and_msg_name(params[:server], params[:name])
-        if (@metric == nil)
-          @metric = Metric.new
-        end
+        @metric = Metric.new
         @metric.total_count = params[:total]
         @metric.success_count = params[:success]
         @metric.error_count = params[:error]
@@ -26,6 +23,7 @@ class FiMetricsController < ApplicationController
         @metric.max_entry_tps = params["max-entry-tps"]
         @metric.last_exit_tps = params["last-exit-tps"]
         @metric.max_exit_tps = params["max-exit-tps"]
+        create_dashboard_metric(@metric, Fi.get_by_url(params[:server]), "Fi")
         error = false
       else
         logger.warn("No ip and name specified: " + params.to_s)
@@ -58,7 +56,7 @@ class FiMetricsController < ApplicationController
 
   def get_common
     timeout = get_timeout
-    @fis = Metric.get_valid_metrics(timeout)
+    @fis = DashboardMetric.get_valid_fi_dashboard_metrics(timeout)
     @totalCount = 0
     @errorCount = 0
     @successCount = 0

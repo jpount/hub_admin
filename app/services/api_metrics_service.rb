@@ -5,6 +5,7 @@ class ApiMetricsService < BaseService
 
   def clear_metrics
     ApiMetric.clear_metrics
+    DashboardMetric.clear_api_metrics
   end
 
   def reset_apis(timeout_val)

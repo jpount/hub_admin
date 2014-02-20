@@ -4,9 +4,6 @@ class DashboardsController < ApplicationController
   def index
     fis
     apis
-    timeout = get_timeout
-    @refresh_ms = get_refresh_ms
-    stats
   end
 
   def reset_fis
@@ -43,129 +40,23 @@ class DashboardsController < ApplicationController
     end
   end
 
-  def lb_metrics
-    stats
+  def dashboard_counts
+    apis
+    fis
     respond_to do |format|
       format.js {
       }
     end
   end
 
-  def lb_stats
-    stats = []
-    haproxy_stats = []
-    error = ""
-    begin
-      haproxy = HaproxyStatsService.new(params)
-      haproxy_stats = haproxy.get_stats
-      haproxy_stats.each do |hap|
-        stat = DashboardStat.new
-        stat.label = hap.lb_name
-        stat.value = hap.last_high
-        stat.status = hap.lb_status
-        stats << stat
-      end
-    rescue => e
-      error = "Could not get stats: " + e.message
-    end
-    respond_to do |format|
-      format.html { render :stats }
-      format.json {
-        if !error.blank?
-          render json: { status: :unprocessable_entity, errors: error }
-        else
-          render json: stats
-        end
-      }
-    end
-  end
-
-  def get_008_in_count
-    db_cnt = get_api_total("pacs008In", "TOTAL")
-    respond_to do |format|
-      format.json {
-        render json: db_cnt
-      }
-    end
-  end
-
-  def get_008_out_count
-    db_cnt = get_api_total("pacs008Out", "TOTAL")
-    respond_to do |format|
-      format.json {
-        render json: db_cnt
-      }
-    end
-  end
-
-  def get_008_out_error_count
-    db_cnt = get_api_total("pacs008Out", "ERROR")
-    respond_to do |format|
-      format.json {
-        render json: db_cnt
-      }
-    end
-  end
-
-  def get_002_in_count
-    db_cnt = get_api_total("pacs002In", "TOTAL")
-    respond_to do |format|
-      format.json {
-        render json: db_cnt
-      }
-    end
-  end
-
-  def get_002_out_count
-    db_cnt = get_api_total("pacs002Out", "TOTAL")
-    respond_to do |format|
-      format.json {
-        render json: db_cnt
-      }
-    end
-  end
-
-  def get_002_out_error_count
-    db_cnt = get_api_total("pacs002Out", "ERROR")
-    respond_to do |format|
-      format.json {
-        render json: db_cnt
-      }
-    end
-  end
-
-  def get_api_total (name, type)
-    db_cnt = DashboardCount.new
-    db_cnt.label = name
-    db_cnt.counter = type
-    db_cnt.value = ApiMetric.get_safe_total(name, type)
-    db_cnt
-  end
-
-  def stats
-    @haproxy_stats = []
-    @show_lb_stats = get_show_lb_stats
-    if @show_lb_stats
-      error = ""
-      begin
-        haproxy = HaproxyStatsService.new(params)
-        @haproxy_stats = haproxy.get_stats
-      rescue => e
-        error = "Could not get stats: " + e.message
-      end
-    end
-  end
-
   def apis
-    @latest008InMetrics = ApiMetric.get_latest_metrics("pacs008In")
-    @latest008OutMetrics = ApiMetric.get_latest_metrics("pacs008Out")
-    @latest002InMetrics = ApiMetric.get_latest_metrics("pacs002In")
-    @latest002OutMetrics = ApiMetric.get_latest_metrics("pacs002Out")
+    timeout = get_timeout
+    @apis = DashboardMetric.get_api_dashboard_metrics(timeout)
   end
 
   def fis
     timeout = get_timeout
-    @fis = Metric.get_dashboard_metrics(timeout)
+    @fis = DashboardMetric.get_fi_dashboard_metrics(timeout)
   end
 
 end

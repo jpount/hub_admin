@@ -39,10 +39,20 @@
           </tr>
           </thead>
           <tbody>
-          <%= render "text_metrics_section", {:sum_metrics => @pac008In, :metrics => @latest008InMetrics } %>
-          <%= render "text_metrics_section", {:sum_metrics => @pac008Out, :metrics => @latest008OutMetrics } %>
-          <%= render "text_metrics_section", {:sum_metrics => @pac002In, :metrics => @latest002InMetrics } %>
-          <%= render "text_metrics_section", {:sum_metrics => @pac002Out, :metrics => @latest002OutMetrics } %>
+          <% @apis.each do |api| %>
+              <tr>
+                <td><%= api.msg_name %></td>
+                <td><%= api.total_count %></td>
+                <td style="color:green"><%= api.success_count %></td>
+                <td style="color:red"><%= api.error_count %></td>
+                <td><%= api.ip %></td>
+                <td><%= api.last_entry_tps %></td>
+                <td><%= api.last_exit_tps %></td>
+                <td><%= api.max_entry_tps %></td>
+                <td><%= api.max_exit_tps %></td>
+                <td><%= "#{time_ago_in_words(api.updated_at)} ago " %></td>
+              </tr>
+          <% end %>
           </tbody>
         </table>
         <div class="control-group" style="margin-top:10px;">

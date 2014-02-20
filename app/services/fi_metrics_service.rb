@@ -5,6 +5,7 @@ class FiMetricsService < BaseService
 
   def clear_metrics
     Metric.clear_metrics
+    DashboardMetric.clear_fi_metrics
   end
 
   def reset_fis(timeout_val)
